@@ -1,0 +1,27 @@
+"""from transformers import pipeline
+
+classifier = pipeline("sentiment-analysis",
+                      model="distilbert-base-uncased-finetuned-sst-2-english",
+                      cache_dir = "./modelos")
+
+frase = input("Ingrese una frase en ingles: ")
+
+#Quiero una nueva version donde el codigo se lo pregunto al usuario
+result = classifier(frase)
+
+print(result)"""
+
+import os
+os.environ["HF_HUB_CACHE"] = "./modelos"
+
+from transformers import pipeline
+
+classifier = pipeline("sentiment-analysis",
+                      model="distilbert-base-uncased-finetuned-sst-2-english")
+
+frase = input("Ingrese una frase en ingles: ")
+
+#Quiero una nueva version donde el codigo se lo pregunto al usuario
+result = classifier(frase)
+
+print(result)

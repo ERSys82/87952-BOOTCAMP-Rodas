@@ -1,0 +1,3 @@
+insalaciones que debo hacer en mi maquina
+- pip install pytest
+- 

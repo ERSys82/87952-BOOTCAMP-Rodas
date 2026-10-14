@@ -12,7 +12,7 @@ class RepositorioPersona:
 
     def __cargar_datos_iniciales(self) -> None:
         personas_prueba = [
-            Persona("1241235", "Eduardo"),
+            Persona("1", "Eduardo"),
             Persona("2345678", "Carlos"),
             Persona("3456789", "Maria"),
         ]
@@ -30,6 +30,15 @@ class RepositorioPersona:
 
     def buscar_por_dni(self, dni: str) -> Persona | None:
         return self.__personas.get(dni)
+
+    def actualizar_nombre(self, dni: str, nombre: str) -> Persona | None:
+        persona = self.buscar_por_dni(dni)
+
+        if persona is None:
+            return None
+
+        persona.cambiar_nombre(nombre)
+        return persona
 
     def listar(self) -> list[Persona]:
         return list(self.__personas.values())

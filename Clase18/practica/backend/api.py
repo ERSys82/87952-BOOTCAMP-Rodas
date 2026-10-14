@@ -37,6 +37,38 @@ def crear_app(servicio: PersonaService | None = None) -> Flask:
             "nombre": persona.nombre
         }), 200
 
+    @app.put("/persona/<dni>")
+    @app.put("/personas/<dni>")
+    def actualizar_nombre_persona(dni):
+        datos = request.get_json(silent=True)
+
+        if not isinstance(datos, dict):
+            return jsonify({
+                "error": "Debe enviar datos en formato JSON"
+            }), 400
+
+        if "nombre" not in datos:
+            return jsonify({
+                "error": "Debe proporcionar el nombre"
+            }), 400
+
+        try:
+            persona = servicio.actualizar_nombre(dni, datos["nombre"])
+        except (ValueError, TypeError) as error:
+            return jsonify({
+                "error": str(error)
+            }), 400
+
+        if persona is None:
+            return jsonify({
+                "error": f"No existe una persona con DNI {dni}"
+            }), 404
+
+        return jsonify({
+            "dni": persona.dni,
+            "nombre": persona.nombre
+        }), 200
+
     @app.delete("/persona/<dni>")
     @app.delete("/personas/<dni>")
     def eliminar_persona(dni):

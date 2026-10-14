@@ -19,6 +19,9 @@ class PersonaService:
     def buscar_por_dni(self, dni: str) -> Persona | None:
         return self.__repositorio.buscar_por_dni(dni)
 
+    def actualizar_nombre(self, dni: str, nombre: str) -> Persona | None:
+        return self.__repositorio.actualizar_nombre(dni, nombre)
+
     def eliminar_persona(self, dni: str) -> bool:
         return self.__repositorio.eliminar(dni)
 
